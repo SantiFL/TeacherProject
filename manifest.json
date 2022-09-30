@@ -4,7 +4,7 @@
   "version": "0.1",
   "manifest_version": 3,
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "workers/background.js"
   },
   "permissions": [
     "storage",
@@ -12,18 +12,18 @@
     "scripting"
   ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "ui/popup.html",
     "default_icon": {
-      "16": "lowPriority.svg",
-      "32": "lowPriority.svg",
-      "48": "lowPriority.svg",
-      "128": "lowPriority.svg"
+      "16": "images/placeholder16.png",
+      "32": "images/placeholder32.png",
+      "48": "images/placeholder48.png",
+      "128": "images/placeholder128.png"
     }
   },
   "icons": {
-    "16": "lowPriority.svg",
-    "32": "lowPriority.svg",
-    "48": "lowPriority.svg",
-    "128": "lowPriority.svg"
+    "16": "images/placeholder16.png",
+    "32": "images/placeholder32.png",
+    "48": "images/placeholder48.png",
+    "128": "images/placeholder128.png"
   }
 }
