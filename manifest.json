@@ -1,0 +1,29 @@
+{
+  "name": "Extensión Placeholder",
+  "description": "Descripción Placeholder",
+  "version": "0.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "lowPriority.svg",
+      "32": "lowPriority.svg",
+      "48": "lowPriority.svg",
+      "128": "lowPriority.svg"
+    }
+  },
+  "icons": {
+    "16": "lowPriority.svg",
+    "32": "lowPriority.svg",
+    "48": "lowPriority.svg",
+    "128": "lowPriority.svg"
+  }
+}
