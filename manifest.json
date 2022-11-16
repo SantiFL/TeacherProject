@@ -9,10 +9,22 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting"
+    "scripting",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "scripts/mainContentScript.js"
+      ],
+      "run_at": "document_start"
+    }
   ],
   "action": {
-    "default_popup": "ui/popup.html",
+    "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "images/placeholder16.png",
       "32": "images/placeholder32.png",

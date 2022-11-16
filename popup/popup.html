@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<link rel="stylesheet" href="popup.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+			  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			  crossorigin="anonymous">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<div id="nonAllowedSiteMainContainer" class="p-2">
+			<span class="p-2">Por favor diríjase a <a href="#">placeholder</a>.</span>
+		</div>
+		<div id="allowedSiteMainContainer" class=" p-2 mainContainter--hidden">
+			<form action="#" class="container-fluid">
+				<div class="mb-2 row g-0">
+					<label class="col-md-3" for="nameInput">Nombre completo</label>
+				</div>
+				<div class="mb-2 row g-0">
+					<input type="text" id="nameInput" placeholder="Juan Lopez">
+				</div>
+
+				<div class="mb-2 row g-0">
+					<label for="scoreInput">Nota</label>
+				</div>
+				<div class="mb-2 row g-0">
+					<input type="number" id="scoreInput" placeholder="5">
+				</div>
+
+				<div class="mb-2 row g-0">
+					<button id="saveButton" type="button" class="btn btn-primary">Guardar</button>
+				</div>
+			</form>
+			<button id="loadStudentsButton" type="button" class="btn btn-primary">Cargar Alumnos</button>
+		</div>
+
+		<script src="popup.js"></script>
+	</body>
+</html>
