@@ -10,5 +10,4 @@ let savedItems = [
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({savedItems});
-    console.log('Installed successfully.');
 });

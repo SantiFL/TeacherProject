@@ -11,26 +11,57 @@
 		<div id="nonAllowedSiteMainContainer" class="p-2">
 			<span class="p-2">Por favor diríjase a <a href="#">placeholder</a>.</span>
 		</div>
-		<div id="allowedSiteMainContainer" class=" p-2 mainContainter--hidden">
-			<form action="#" class="container-fluid">
-				<div class="mb-2 row g-0">
-					<label class="col-md-3" for="nameInput">Nombre completo</label>
+		<div id="allowedSiteMainContainer" class="container-fluid p-2">
+			<div class="row g-0">
+				<div class="col-10">
+					<span>Alumnos totales: </span>
 				</div>
-				<div class="mb-2 row g-0">
-					<input type="text" id="nameInput" placeholder="Juan Lopez">
+				<div class="col-2 text-end">
+					<span class="text-primary" id="totalIndicator"></span>
 				</div>
+			</div>
+			<div class="row g-0">
+				<div class="col-10">
+					<span>Alumnos cargados: </span>
+				</div>
+				<div class="col-2 text-end">
+					<span class="text-danger" id="uploadedIndicator"></span>
+				</div>
+			</div>
 
-				<div class="mb-2 row g-0">
-					<label for="scoreInput">Nota</label>
-				</div>
-				<div class="mb-2 row g-0">
-					<input type="number" id="scoreInput" placeholder="5">
-				</div>
+			<hr class="my-2">
 
-				<div class="mb-2 row g-0">
-					<button id="saveButton" type="button" class="btn btn-primary">Guardar</button>
+			<div class="row g-0">
+				<div class="col">
+					<div class="vstack gap-1">
+						<span>Alumno: </span>
+						<span id="currentStudentName" class="text-muted">Jorge Andrés Fonteveccia de Bernardo</span>
+					</div>
 				</div>
-			</form>
+			</div>
+
+			<hr class="my-2">
+
+			<div class="row g-0">
+				<div class="col">
+					<form action="#" class="vstack gap-2" id="studentForm">
+
+						<div class="d-flex justify-content-between align-items-baseline">
+							<label for="finishedInput">Finalización por Espacio Curricular aprobado.</label>
+							<input type="checkbox" id="finishedInput">
+						</div>
+
+						<label for="summary1">Síntesis etapa 1</label>
+						<textarea id="summary1" maxlength="800" placeholder="Máximo 800 caracteres."></textarea>
+
+						<label for="summary2">Síntesis etapa 2</label>
+						<textarea id="summary2" maxlength="800" placeholder="Máximo 800 caracteres."></textarea>
+
+						<button id="saveButton" type="button" class="btn btn-primary">Guardar</button>
+					</form>
+				</div>
+			</div>
+
 			<button id="loadStudentsButton" type="button" class="btn btn-primary">Cargar Alumnos</button>
 		</div>
 
