@@ -1,23 +1,25 @@
 <!doctype html>
 <html lang="es">
 	<head>
-		<link rel="stylesheet" href="popup.css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 			  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			  crossorigin="anonymous">
 		<meta charset="UTF-8">
 	</head>
+	<style>
+		.h-0 {
+			height: 0px;
+		}
+	</style>
+
 	<body>
-		<div id="nonAllowedSiteMainContainer" class="p-2">
-			<span class="p-2">Por favor diríjase a <a href="#">placeholder</a>.</span>
-		</div>
-		<div id="allowedSiteMainContainer" class="container-fluid p-2">
+		<div id="initialPanel" class="container-fluid px-2 py-3">
 			<div class="row g-0">
 				<div class="col-10">
 					<span>Alumnos totales: </span>
 				</div>
 				<div class="col-2 text-end">
-					<span class="text-primary" id="totalIndicator"></span>
+					<span class="text-danger fw-bold" id="totalIndicator">0</span>
 				</div>
 			</div>
 			<div class="row g-0">
@@ -25,12 +27,20 @@
 					<span>Alumnos cargados: </span>
 				</div>
 				<div class="col-2 text-end">
-					<span class="text-danger" id="uploadedIndicator"></span>
+					<span class="text-danger fw-bold" id="uploadedIndicator">0</span>
 				</div>
 			</div>
+			<div class="row g-0">
+				<div class="col-12">
+					<button id="loadStudentsButton" type="button" class="btn w-100 btn-primary mt-3">Cargar Alumnos
+					</button>
+				</div>
+			</div>
+		</div>
 
-			<hr class="my-2">
+		<hr class="mx-2 my-1">
 
+		<div id="secondPanel" class="overflow-hidden h-0 container-fluid">
 			<div class="row g-0">
 				<div class="col">
 					<div class="vstack gap-1">
@@ -61,8 +71,6 @@
 					</form>
 				</div>
 			</div>
-
-			<button id="loadStudentsButton" type="button" class="btn btn-primary">Cargar Alumnos</button>
 		</div>
 
 		<script src="popup.js"></script>

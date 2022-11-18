@@ -1,50 +1,18 @@
 //Query active tabs
-chrome.tabs.query({active: true, lastFocusedWindow: true}, initUi);
+//chrome.tabs.query({active: true, lastFocusedWindow: true}, initUi);
+
+console.log('testing');
 
 /**
  * Display the correct ui based on the current URL.
  */
-function initUi(tabs) {
+function initUi() {
+    chrome.storage.sync.get('students', renderUiAllowed);
 
-    // let allowedUrl = 'https://gestionestudiantes.cba.gov.ar/Escuelas/Aprendizajes';
-    let allowedUrl = 'file:///C:/'; //TODO 15/11/2022: placeholder
-
-    //Define allowed URL
-    let allowedUrlRegex = new RegExp(`^${allowedUrl}.+`, 'i');
-
-    //Get current URL
-    let currentUrl = tabs[0].url;
-
-    if (allowedUrlRegex.test(currentUrl)) {
-        chrome.storage.sync.get('students', renderUiAllowed);
-
-        //Early exit to avoid else block
-        return;
-    }
+    //Early exit to avoid else block
+    return;
 
     renderUiDenied();
-}
-
-/**
- * Display the ui seen on allowed sites.
- */
-function renderUiAllowed(students) {
-    let allowedSiteMainContainer = document.getElementById('allowedSiteMainContainer');
-    let nonAllowedSiteMainContainer = document.getElementById('nonAllowedSiteMainContainer');
-    showElement(allowedSiteMainContainer);
-    hideElement(nonAllowedSiteMainContainer);
-    initIndicators(students['students']);
-    initLearningForm(students['students']);
-}
-
-/**
- * Display the ui seen on non-allowed sites.
- */
-function renderUiDenied() {
-    let allowedSiteMainContainer = document.getElementById('allowedSiteMainContainer');
-    let nonAllowedSiteMainContainer = document.getElementById('nonAllowedSiteMainContainer');
-    hideElement(allowedSiteMainContainer);
-    showElement(nonAllowedSiteMainContainer);
 }
 
 /**

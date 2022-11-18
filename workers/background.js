@@ -1,13 +1,22 @@
-let students = [];
+chrome.runtime.onInstalled.addListener(initialSetup);
 
-let savedItems = [
-    {
-        name: 'Jorge Lopez',
-        firstSummary: '1st example',
-        secondSummary: '2nd example'
+function initialSetup() {
+    let students = [];
+    chrome.storage.sync.set({students});
+    chrome.action.onClicked.addListener(messageContentScript);
+}
+
+function messageContentScript(tab) {
+    // let allowedUrl = 'https://gestionestudiantes.cba.gov.ar/Escuelas/Aprendizajes';
+    let allowedUrl = 'file:///C:/'; //TODO 15/11/2022: placeholder
+
+    //Define allowed URL
+    let allowedUrlRegex = new RegExp(`^${allowedUrl}.+`, 'i');
+
+    //Get current URL
+    if (!allowedUrlRegex.test(tab.url)) {
+        return;
     }
-];
 
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.set({savedItems});
-});
+    chrome.tabs.sendMessage(tab.id, "clickedActionIcon");
+}

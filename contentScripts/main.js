@@ -1,6 +1,63 @@
-document.addEventListener('DOMContentLoaded', initStudents);
+chrome.runtime.onMessage.addListener(receiveMessage);
 
-function initStudents(event) {
+function receiveMessage(message, sender) {
+    if (message === 'clickedActionIcon') {
+        togglePopup();
+    }
+}
+
+function togglePopup() {
+
+    let iframe = document.getElementById('studentManagerIFrame');
+
+    if (!iframe) {
+        generateIframe();
+        iframe = document.getElementById('studentManagerIFrame');
+    }
+
+    if (iframe.hidden) {
+        showElement(iframe);
+        return;
+    }
+
+    hideElement(iframe);
+
+
+    let test = document.getElementById('initialPanel');
+    console.log(test);
+
+}
+
+function generateIframe() {
+    let iframe = document.createElement('iframe');
+    iframe.id = 'studentManagerIFrame'; //TODO 17/11/2022: placeholder
+    iframe.src = chrome.runtime.getURL('popup/popup.html');
+    iframe.hidden = true;
+    document.body.appendChild(iframe);
+}
+
+/**
+ * @param element DOM element to hide.
+ */
+function hideElement(element) {
+    element.classList.add('d-none');
+    element.classList.add('invisible');
+    element.classList.remove('visible');
+    element.hidden = true;
+}
+
+/**
+ * @param element DOM element to show.
+ */
+function showElement(element) {
+    element.classList.add('visible');
+    element.classList.remove('d-none');
+    element.classList.remove('invisible');
+    element.hidden = false;
+}
+
+function loadStudents(event) {
+    console.log('initStuss');
 
     let mainPanelSelector = '#MainContent_pnlEstudiantes';
     let mainPanel = document.querySelector(mainPanelSelector);

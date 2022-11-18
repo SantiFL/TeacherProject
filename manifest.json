@@ -15,27 +15,34 @@
   "content_scripts": [
     {
       "matches": [
-        "file:///C:/*"
+        "file:///C:/*",
+        "https://*/*"
       ],
       "js": [
-        "scripts/mainContentScript.js"
+        "contentScripts/main.js"
+      ],
+      "css": [
+        "contentScripts/main.css"
       ],
       "run_at": "document_start"
     }
   ],
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "images/placeholder16.png",
-      "32": "images/placeholder32.png",
-      "48": "images/placeholder48.png",
-      "128": "images/placeholder128.png"
-    }
-  },
+  "action": {},
   "icons": {
     "16": "images/placeholder16.png",
     "32": "images/placeholder32.png",
     "48": "images/placeholder48.png",
     "128": "images/placeholder128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "popup/popup.html"
+      ],
+      "matches": [
+        "file://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
 }
