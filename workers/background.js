@@ -3,20 +3,25 @@ chrome.runtime.onInstalled.addListener(initialSetup);
 function initialSetup() {
     let students = [];
     chrome.storage.sync.set({students});
-    chrome.action.onClicked.addListener(messageContentScript);
+    chrome.action.onClicked.addListener(onActionClick);
 }
 
-function messageContentScript(tab) {
-    // let allowedUrl = 'https://gestionestudiantes.cba.gov.ar/Escuelas/Aprendizajes';
-    let allowedUrl = 'file:///C:/'; //TODO 15/11/2022: placeholder
+function onActionClick(tab) {
 
-    //Define allowed URL
-    let allowedUrlRegex = new RegExp(`^${allowedUrl}.+`, 'i');
+    let prohibitedUrl = 'chrome://';
 
-    //Get current URL
-    if (!allowedUrlRegex.test(tab.url)) {
+    let prohibitedUrlRegex = new RegExp(`^${prohibitedUrl}.+`, 'i');
+
+    if (prohibitedUrlRegex.test(tab.url)) {
+        console.log(`Prohibited URL: ${tab.url}`);
         return;
     }
 
-    chrome.tabs.sendMessage(tab.id, "clickedActionIcon");
+    //inject the main content script
+    chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files: [
+            'injected/main.js'
+        ]
+    });
 }

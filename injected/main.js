@@ -1,12 +1,6 @@
-chrome.runtime.onMessage.addListener(receiveMessage);
+initUi();
 
-function receiveMessage(message, sender) {
-    if (message === 'clickedActionIcon') {
-        togglePopup();
-    }
-}
-
-function togglePopup() {
+function initUi() {
 
     let iframe = document.getElementById('studentManagerIFrame');
 
@@ -21,17 +15,22 @@ function togglePopup() {
     }
 
     hideElement(iframe);
-
-
-    let test = document.getElementById('initialPanel');
-    console.log(test);
-
 }
 
 function generateIframe() {
     let iframe = document.createElement('iframe');
     iframe.id = 'studentManagerIFrame'; //TODO 17/11/2022: placeholder
-    iframe.src = chrome.runtime.getURL('popup/popup.html');
+    iframe.style.boxSizing = 'border-box';
+    iframe.style.border = 'none';
+    iframe.style.height = '100%';
+    iframe.style.minWidth = '25rem';
+    iframe.style.position = 'fixed';
+    iframe.style.top = '0';
+    iframe.style.right = '0';
+    iframe.style.zIndex = '999999999';
+    iframe.style.borderLeft = '1px solid #ccc';
+    iframe.style.boxShadow = '5px 0px 10px #ccc';
+    iframe.src = chrome.runtime.getURL('ui/sidebar.html');
     iframe.hidden = true;
     document.body.appendChild(iframe);
 }
@@ -57,7 +56,6 @@ function showElement(element) {
 }
 
 function loadStudents(event) {
-    console.log('initStuss');
 
     let mainPanelSelector = '#MainContent_pnlEstudiantes';
     let mainPanel = document.querySelector(mainPanelSelector);
@@ -126,3 +124,8 @@ function loadStudents(event) {
 
     chrome.storage.sync.set({students});
 }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log('Got a message on content script!');
+    sendResponse('this is my response!')
+});

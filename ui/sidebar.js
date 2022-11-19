@@ -1,47 +1,45 @@
-//Query active tabs
-//chrome.tabs.query({active: true, lastFocusedWindow: true}, initUi);
+startUp();
 
-console.log('testing');
-
-/**
- * Display the correct ui based on the current URL.
- */
-function initUi() {
-    chrome.storage.sync.get('students', renderUiAllowed);
-
-    //Early exit to avoid else block
-    return;
-
-    renderUiDenied();
+function startUp() {
+    chrome.storage.sync.get('students', initUi);
 }
 
 /**
- * @param element DOM element to hide.
+ * Render the appropriate elements based on the students.
  */
-function hideElement(element) {
-    element.classList.add('d-none');
-    element.classList.add('invisible');
-    element.classList.remove('visible');
+function initUi(studentsObject) {
+
+    let loadStudentsButton = document.getElementById('loadStudentsButton');
+    loadStudentsButton.addEventListener('click', test);
+
+    let students = studentsObject.students;
+
+    if (students.length === 0) {
+        hideStudentsPanel();
+        return;
+    }
+
+    initIndicators(students);
+    showStudentsPanel();
 }
 
-/**
- * @param element DOM element to show.
- */
-function showElement(element) {
-    element.classList.add('visible');
-    element.classList.remove('d-none');
-    element.classList.remove('invisible');
+function hideStudentsPanel() {
+    let studentsPanel = document.getElementById('studentsPanel');
+    studentsPanel.classList.add('d-none');
+}
+
+function showStudentsPanel() {
+    let studentsPanel = document.getElementById('studentsPanel');
+    studentsPanel.classList.remove('d-none');
 }
 
 function initIndicators(students) {
-    console.log(students);
     let totalIndicator = document.getElementById('totalIndicator');
     totalIndicator.innerText = students.length;
 
     let uploadedIndicator = document.getElementById('uploadedIndicator');
     uploadedIndicator.innerText = 0;
 }
-
 
 function initLearningForm(students) {
 
@@ -84,4 +82,19 @@ function initLearningForm(students) {
 
         div1.insertAdjacentElement('afterend', div2);
     }
+}
+
+function test() {
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
+        chrome.tabs.sendMessage(
+            tabs[0].id,
+            'loadStudents',
+            callbackTest
+        );
+    });
+}
+
+function callbackTest(response) {
+    console.log('got a response in iframe');
+    console.log(response);
 }

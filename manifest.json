@@ -12,21 +12,6 @@
     "scripting",
     "tabs"
   ],
-  "content_scripts": [
-    {
-      "matches": [
-        "file:///C:/*",
-        "https://*/*"
-      ],
-      "js": [
-        "contentScripts/main.js"
-      ],
-      "css": [
-        "contentScripts/main.css"
-      ],
-      "run_at": "document_start"
-    }
-  ],
   "action": {},
   "icons": {
     "16": "images/placeholder16.png",
@@ -37,7 +22,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "popup/popup.html"
+        "ui/sidebar.html",
+        "ui/sidebar.js",
+        "ui/sidebar.css"
       ],
       "matches": [
         "file://*/*",
