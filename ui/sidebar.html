@@ -39,7 +39,7 @@
 			<div class="row g-0">
 				<div class="col">
 					<div class="vstack gap-1">
-						<span>Alumno: </span>
+						<div><span>Alumno </span><span id="currentStudentIndex"></span></div>
 						<span id="currentStudentName" class="text-muted">Jorge Andrés Fonteveccia de Bernardo</span>
 					</div>
 				</div>
@@ -55,6 +55,8 @@
 							<label for="finishedInput">Finalización por Espacio Curricular aprobado.</label>
 							<input type="checkbox" id="finishedInput">
 						</div>
+
+						<div id="learningsSection"></div>
 
 						<label for="summary1">Síntesis etapa 1</label>
 						<textarea id="summary1" maxlength="800" placeholder="Máximo 800 caracteres."></textarea>

@@ -55,7 +55,7 @@ function showElement(element) {
     element.hidden = false;
 }
 
-function loadStudents(event) {
+function obtainStudents(event) {
 
     let mainPanelSelector = '#MainContent_pnlEstudiantes';
     let mainPanel = document.querySelector(mainPanelSelector);
@@ -122,10 +122,9 @@ function loadStudents(event) {
         students.push(student);
     }
 
-    chrome.storage.sync.set({students});
+    return students;
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log('Got a message on content script!');
-    sendResponse('this is my response!')
+    sendResponse(obtainStudents());
 });

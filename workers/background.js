@@ -1,8 +1,6 @@
 chrome.runtime.onInstalled.addListener(initialSetup);
 
 function initialSetup() {
-    let students = [];
-    chrome.storage.sync.set({students});
     chrome.action.onClicked.addListener(onActionClick);
 }
 
