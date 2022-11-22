@@ -72,6 +72,7 @@ function obtainStudents(event) {
         }
 
         let student = {};
+        student.uploaded = false;
 
         let nameSelector = '.btn.btn-warning.btn-block span';
         let nameElement = studentContainer.querySelector(nameSelector);
@@ -113,11 +114,8 @@ function obtainStudents(event) {
 
         let textAreas = studentContainer.querySelectorAll('textarea');
 
-        student.summaries = [];
-
-        for (const textArea of textAreas) {
-            student.summaries.push(textArea.value);
-        }
+        student.summary1 = '';
+        student.summary2 = '';
 
         students.push(student);
     }

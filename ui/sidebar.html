@@ -6,10 +6,11 @@
 			  crossorigin="anonymous">
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="sidebar.css" type="text/css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 	</head>
 	<body>
-		<div class="container-fluid px-2 py-3">
-			<div class="row g-0">
+		<div class="container-fluid px-2">
+			<div class="row g-0 mt-2">
 				<div class="col-10">
 					<span>Alumnos totales: </span>
 				</div>
@@ -17,7 +18,7 @@
 					<span class="text-danger fw-bold" id="totalIndicator">0</span>
 				</div>
 			</div>
-			<div class="row g-0">
+			<div class="row g-0 mt-2">
 				<div class="col-10">
 					<span>Alumnos cargados: </span>
 				</div>
@@ -25,27 +26,39 @@
 					<span class="text-danger fw-bold" id="uploadedIndicator">0</span>
 				</div>
 			</div>
-			<div class="row g-0">
+			<div class="row g-0 mt-3">
 				<div class="col-12">
-					<button id="loadStudentsButton" type="button" class="btn w-100 btn-primary mt-3">Cargar Alumnos
+					<button id="loadStudentsButton" type="button" class="btn w-100 btn-primary" tabindex="1">Leer
+						Alumnos
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<hr class="mx-2 my-1">
+		<hr class="mx-2 my-3">
 
-		<div id="studentsPanel" class="overflow-hidden container-fluid">
+		<div id="studentPanel" class="d-none overflow-hidden container-fluid">
 			<div class="row g-0">
 				<div class="col">
-					<div class="vstack gap-1">
-						<div><span>Alumno </span><span id="currentStudentIndex"></span></div>
+					<div class="vstack gap-1 pt-1">
+						<div class="d-flex justify-content-between align-items-baseline">
+							<button class="btn btn-outline-secondary rounded" type="button" id="previousStudentButton">
+								<i class="bi bi-caret-left-fill"></i>
+							</button>
+							<span id="currentStudentIndex"></span>
+							<button class="btn btn-outline-secondary rounded" type="button" id="nextStudentButton">
+								<i class="bi bi-caret-right-fill"></i>
+							</button>
+						</div>
+						<div class="d-flex justify-content-between align-items-baseline mt-2">
+							<span>Alumno </span>
+						</div>
 						<span id="currentStudentName" class="text-muted">Jorge Andrés Fonteveccia de Bernardo</span>
 					</div>
 				</div>
 			</div>
 
-			<hr class="my-2">
+			<hr class="my-3">
 
 			<div class="row g-0">
 				<div class="col">
@@ -56,7 +69,8 @@
 							<input type="checkbox" id="finishedInput">
 						</div>
 
-						<div id="learningsSection"></div>
+						<div class="vstack gap-2" id="learningsSection">
+						</div>
 
 						<label for="summary1">Síntesis etapa 1</label>
 						<textarea id="summary1" maxlength="800" placeholder="Máximo 800 caracteres."></textarea>

@@ -2,6 +2,15 @@ chrome.runtime.onInstalled.addListener(initialSetup);
 
 function initialSetup() {
     chrome.action.onClicked.addListener(onActionClick);
+    chrome.commands.onCommand.addListener(onActionShortcut);
+}
+
+function onActionShortcut(command) {
+    if (command === 'openSidebar') {
+        chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
+            onActionClick(tabs[0]);
+        });
+    }
 }
 
 function onActionClick(tab) {
