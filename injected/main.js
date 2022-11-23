@@ -1,3 +1,8 @@
+// Listener for messages sent from the sidebar content script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    sendResponse(obtainStudents());
+});
+
 initUi();
 
 function initUi() {
@@ -17,6 +22,9 @@ function initUi() {
     hideElement(iframe);
 }
 
+/**
+ * create an iframe element and append it to the current page's body.
+ */
 function generateIframe() {
     let iframe = document.createElement('iframe');
     iframe.id = 'studentManagerIFrame'; //TODO 17/11/2022: placeholder
@@ -36,6 +44,7 @@ function generateIframe() {
 }
 
 /**
+ * Hide an element using classes and it's hidden attribute.
  * @param element DOM element to hide.
  */
 function hideElement(element) {
@@ -46,6 +55,7 @@ function hideElement(element) {
 }
 
 /**
+ * Display an element using classes and it's hidden attribute.
  * @param element DOM element to show.
  */
 function showElement(element) {
@@ -55,7 +65,11 @@ function showElement(element) {
     element.hidden = false;
 }
 
-function obtainStudents(event) {
+/**
+ * Scrape the DOM for the students listed in the current page.
+ * @returns An array of the students obtained from the current page.
+ */
+function obtainStudents() {
 
     let mainPanelSelector = '#MainContent_pnlEstudiantes';
     let mainPanel = document.querySelector(mainPanelSelector);
@@ -122,7 +136,3 @@ function obtainStudents(event) {
 
     return students;
 }
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    sendResponse(obtainStudents());
-});
