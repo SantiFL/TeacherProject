@@ -101,6 +101,10 @@ function initLearningsUi() {
     }
 }
 
+/**
+ * Update the DOM elements related to the student being edited currently.
+ * Also updates every button besides the "Load students" button.
+ */
 function updateCurrentStudentUi() {
     currentStudentName.innerText = currentStudent.name;
     currentStudentIndex.innerText = `${(students.indexOf(currentStudent) + 1)}/${students.length}`;
@@ -123,6 +127,9 @@ function updateCurrentStudentUi() {
     previousStudentButton.disabled = students.indexOf(currentStudent) === 0;
 }
 
+/**
+ * Update the indicators' DOM elements.
+ */
 function updateIndicatorsUi() {
     totalIndicator.innerText = students.length;
 
@@ -178,7 +185,9 @@ function receiveStudents(response) {
     updateCurrentStudentUi();
 }
 
-//TODO 20/11/2022: doc
+/**
+ * Save changes made on the current student and setup to edit the next one.
+ */
 function saveButtonClick() {
     //TODO 20/11/2022: validate form
     updateCurrentStudent();
@@ -210,11 +219,17 @@ function updateCurrentStudent() {
     }
 }
 
+/**
+ * Discard changes made on current student and setup to edit the next one.
+ */
 function nextStudentButtonClick() {
     currentStudent = students[students.indexOf(currentStudent) + 1];
     updateCurrentStudentUi();
 }
 
+/**
+ * Discard changes made on current student and setup to edit the previous one.
+ */
 function previousStudentButtonClick() {
     currentStudent = students[students.indexOf(currentStudent) - 1];
     updateCurrentStudentUi();
