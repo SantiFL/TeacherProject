@@ -1,5 +1,6 @@
 let students;
 let loadStudentsButton;
+let finalizeButton;
 let studentPanel;
 let totalIndicator;
 let uploadedIndicator;
@@ -7,7 +8,7 @@ let currentStudentIndex;
 let currentStudentName;
 let currentStudent;
 let finishedInput;
-let saveButton;
+let mainActionButton;
 let summary1Input;
 let summary2Input;
 let learningsSection;
@@ -32,6 +33,9 @@ function initUi() {
     loadStudentsButton = document.getElementById('loadStudentsButton');
     loadStudentsButton.addEventListener('click', loadStudentsButtonClick);
 
+    finalizeButton = document.getElementById('finalizeButton');
+    finalizeButton.addEventListener('click', finalizeButtonClick);
+
     studentPanel = document.getElementById('studentPanel');
     totalIndicator = document.getElementById('totalIndicator');
     uploadedIndicator = document.getElementById('uploadedIndicator');
@@ -41,8 +45,8 @@ function initUi() {
 
     finishedInput = document.getElementById('finishedInput');
 
-    saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', saveButtonClick);
+    mainActionButton = document.getElementById('mainActionButton');
+    mainActionButton.addEventListener('click', mainActionButtonClick);
 
     summary1Input = document.getElementById('summary1');
     summary2Input = document.getElementById('summary2');
@@ -60,6 +64,7 @@ function initUi() {
  */
 function initLearningsUi() {
     let learnings = currentStudent.learnings;
+    learningsSection.innerHTML = "";
 
     for (const learning of learnings) {
 
@@ -122,7 +127,6 @@ function updateCurrentStudentUi() {
         learningInputs[1].checked = currentStudent.learnings[i].pending;
     }
 
-    saveButton.disabled = students.indexOf(currentStudent) === students.length - 1;
     nextStudentButton.disabled = students.indexOf(currentStudent) === students.length - 1;
     previousStudentButton.disabled = students.indexOf(currentStudent) === 0;
 }
@@ -155,9 +159,13 @@ function updateIndicatorsUi() {
 }
 
 /**
- * Message the content script and set a callback for it's response..
+ * Message the content script and set a callback for its response.
  */
 function loadStudentsButtonClick() {
+    if (students.length !== 0 && !confirm("Se perderán los cambios no guardados.")) {
+        return;
+    }
+
     chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, 'loadStudents', receiveStudents);
     });
@@ -178,21 +186,28 @@ function receiveStudents(response) {
     studentPanel.classList.remove('d-none');
     currentStudent = students[0];
 
-    loadStudentsButton.disabled = true;
-
     initLearningsUi();
     updateIndicatorsUi();
     updateCurrentStudentUi();
+    updateMainActionButtonUi();
+    updateLoadStudentsButtonUi();
+    updateFinalizeButtonUi();
 }
 
 /**
  * Save changes made on the current student and setup to edit the next one.
  */
-function saveButtonClick() {
-    //TODO 20/11/2022: validate form
+function mainActionButtonClick() {
+    //TODO 20/11/2022: validate form?
+
+    if (students.indexOf(currentStudent) !== students.length - 1) {
+        nextStudentButtonClick();
+        return;
+    }
+
     updateCurrentStudent();
     updateIndicatorsUi();
-    updateCurrentStudentUi();
+    uploadChanges();
 }
 
 /**
@@ -213,24 +228,73 @@ function updateCurrentStudent() {
 
     currentStudent.summary1 = summary1Input.value;
     currentStudent.summary2 = summary2Input.value;
-
-    if (students.indexOf(currentStudent) !== students.length - 1) {
-        currentStudent = students[students.indexOf(currentStudent) + 1];
-    }
 }
 
 /**
  * Discard changes made on current student and setup to edit the next one.
  */
 function nextStudentButtonClick() {
-    currentStudent = students[students.indexOf(currentStudent) + 1];
+    updateCurrentStudent();
+    if (students.indexOf(currentStudent) !== students.length - 1) {
+        currentStudent = students[students.indexOf(currentStudent) + 1];
+    }
+    updateIndicatorsUi();
     updateCurrentStudentUi();
+    updateMainActionButtonUi();
+    updateFinalizeButtonUi();
 }
 
 /**
  * Discard changes made on current student and setup to edit the previous one.
  */
 function previousStudentButtonClick() {
-    currentStudent = students[students.indexOf(currentStudent) - 1];
+    updateCurrentStudent();
+    if (students.indexOf(currentStudent) !== 0) {
+        currentStudent = students[students.indexOf(currentStudent) - 1];
+    }
+    updateIndicatorsUi();
     updateCurrentStudentUi();
+    updateMainActionButtonUi();
+    updateFinalizeButtonUi();
+}
+
+function updateMainActionButtonUi() {
+    if (students.indexOf(currentStudent) === students.length - 1) {
+        mainActionButton.innerText = 'Guardar';
+    } else {
+        mainActionButton.innerText = 'Siguiente';
+    }
+}
+
+function updateFinalizeButtonUi() {
+    finalizeButton.disabled = students.length === 0;
+}
+
+function updateLoadStudentsButtonUi() {
+    if (students.length === 0) {
+        loadStudentsButton.disabled = true;
+        loadStudentsButton.classList.add('btn-main');
+        loadStudentsButton.classList.remove('btn-danger');
+    } else {
+        loadStudentsButton.disabled = false;
+        loadStudentsButton.classList.add('btn-danger');
+        loadStudentsButton.classList.remove('btn-main');
+    }
+}
+
+function uploadChanges() {
+    //TODO 12/5/2022: proper callback
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, 'uploadChanges', receiveUploadUpdate);
+    });
+}
+
+function receiveUploadUpdate(url) {
+    console.log(url);
+    console.log('receivedupdate');
+}
+
+
+function finalizeButtonClick() {
+    uploadChanges();
 }

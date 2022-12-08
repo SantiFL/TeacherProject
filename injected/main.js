@@ -1,6 +1,13 @@
 // Listener for messages sent from the sidebar content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    sendResponse(obtainStudents());
+    if (message === 'loadStudents') {
+        sendResponse(obtainStudents());
+        return;
+    }
+    if (message === 'uploadChanges') {
+        uploadChanges(sendResponse);
+    }
+
 });
 
 initUi();
@@ -55,7 +62,7 @@ function hideElement(element) {
 }
 
 /**
- * Display an element using classes and it's hidden attribute.
+ * Display an element using classes and its hidden attribute.
  * @param element DOM element to show.
  */
 function showElement(element) {
@@ -128,11 +135,17 @@ function obtainStudents() {
 
         let textAreas = studentContainer.querySelectorAll('textarea');
 
-        student.summary1 = '';
-        student.summary2 = '';
+        student.summary1 = textAreas[0].value;
+        student.summary2 = textAreas[1].value;
 
         students.push(student);
     }
 
     return students;
+}
+
+function uploadChanges(sendResponse) {
+    let form = document.getElementById('aspnetForm');
+    let url = 'https://gestionestudiantes.cba.gov.ar/Escuelas/' + form.getAttribute('action').slice(2);
+    sendResponse(url);
 }

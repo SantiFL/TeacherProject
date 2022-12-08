@@ -18,7 +18,7 @@
 					<span class="text-danger fw-bold" id="totalIndicator">0</span>
 				</div>
 			</div>
-			<div class="row g-0 mt-2">
+			<div class="row g-0 mt-2 d-none">
 				<div class="col-10">
 					<span>Alumnos cargados: </span>
 				</div>
@@ -27,10 +27,15 @@
 				</div>
 			</div>
 			<div class="row g-0 mt-3">
-				<div class="col-12">
-					<button id="loadStudentsButton" type="button" class="btn w-100 btn-primary" tabindex="1">Leer
-						Alumnos
-					</button>
+				<div class="col">
+					<div class="d-flex">
+						<button id="loadStudentsButton" type="button" class="btn btn-main w-100" tabindex="1">
+							Leer Alumnos
+						</button>
+						<button id="finalizeButton" type="button" class="btn btn-main w-100" tabindex="1" disabled>
+							Finalizar
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -42,11 +47,11 @@
 				<div class="col">
 					<div class="vstack gap-1 pt-1">
 						<div class="d-flex justify-content-between align-items-baseline">
-							<button class="btn btn-outline-secondary rounded" type="button" id="previousStudentButton">
+							<button class="btn btn-outline-main rounded btn-selector" type="button" id="previousStudentButton">
 								<i class="bi bi-caret-left-fill"></i>
 							</button>
 							<span id="currentStudentIndex"></span>
-							<button class="btn btn-outline-secondary rounded" type="button" id="nextStudentButton">
+							<button class="btn btn-outline-main rounded btn-selector" type="button" id="nextStudentButton">
 								<i class="bi bi-caret-right-fill"></i>
 							</button>
 						</div>
@@ -78,7 +83,7 @@
 						<label for="summary2">Síntesis etapa 2</label>
 						<textarea id="summary2" maxlength="800" placeholder="Máximo 800 caracteres."></textarea>
 
-						<button id="saveButton" type="button" class="btn btn-primary">Guardar</button>
+						<button id="mainActionButton" type="button" class="btn btn-main"></button>
 					</form>
 				</div>
 			</div>

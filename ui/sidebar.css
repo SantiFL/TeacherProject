@@ -1,11 +1,49 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
-
-#previousStudentButton, #nextStudentButton {
+.btn-selector {
 	padding: 5px;
 	width: 2em;
 	height: 2em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.btn-main {
+	--bs-btn-color: white;
+	--bs-btn-hover-color: white;
+	--bs-btn-active-color: white;
+	--bs-btn-disabled-color: white;
+
+	--bs-btn-bg: #43A6E8;
+	--bs-btn-hover-bg: #3584b9;
+	--bs-btn-active-bg: #3584b9;
+	--bs-btn-disabled-bg: #3584b9;
+}
+
+.btn-outline-main {
+	--bs-btn-bg: white;
+	--bs-btn-hover-bg: white;
+	--bs-btn-active-bg: white;
+	--bs-btn-disabled-bg: white;
+
+	--bs-border-width: 1px;
+	--bs-border-color: red;
+
+	--bs-btn-color: #43A6E8;
+	--bs-btn-hover-color: #3584b9;
+	--bs-btn-active-color: #3584b9;
+	--bs-btn-disabled-color: #3584b9;
+
+	--bs-btn-border-color: #43A6E8;
+	--bs-btn-active-border-color: #3584b9;
+	--bs-btn-hover-border-color: #3584b9;
+}
+
+#loadStudentsButton {
+	margin-right: 2px
+}
+
+#finalizeButton {
+	margin-left: 2px
 }
