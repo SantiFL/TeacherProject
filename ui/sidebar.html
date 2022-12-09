@@ -12,7 +12,7 @@
 		<div class="container-fluid px-2">
 			<div class="row g-0 mt-2">
 				<div class="col-10">
-					<span>Alumnos totales: </span>
+					<span class="user-select-none">Alumnos:</span>
 				</div>
 				<div class="col-2 text-end">
 					<span class="text-danger fw-bold" id="totalIndicator">0</span>
@@ -20,7 +20,7 @@
 			</div>
 			<div class="row g-0 mt-2 d-none">
 				<div class="col-10">
-					<span>Alumnos cargados: </span>
+					<span class="user-select-none">Alumnos cargados:</span>
 				</div>
 				<div class="col-2 text-end">
 					<span class="text-danger fw-bold" id="uploadedIndicator">0</span>
@@ -29,11 +29,11 @@
 			<div class="row g-0 mt-3">
 				<div class="col">
 					<div class="d-flex">
-						<button id="loadStudentsButton" type="button" class="btn btn-main w-100" tabindex="1">
-							Leer Alumnos
+						<button accesskey="l" id="loadStudentsButton" type="button" class="btn btn-main w-100" tabindex="1">
+							<u>L</u>eer Alumnos
 						</button>
-						<button id="finalizeButton" type="button" class="btn btn-main w-100" tabindex="1" disabled>
-							Finalizar
+						<button accesskey="f" id="finalizeButton" type="button" class="btn btn-main w-100" tabindex="1" disabled>
+							<u>F</u>inalizar
 						</button>
 					</div>
 				</div>
@@ -50,13 +50,13 @@
 							<button class="btn btn-outline-main rounded btn-selector" type="button" id="previousStudentButton">
 								<i class="bi bi-caret-left-fill"></i>
 							</button>
-							<span id="currentStudentIndex"></span>
+							<span class="user-select-none" id="currentStudentIndex"></span>
 							<button class="btn btn-outline-main rounded btn-selector" type="button" id="nextStudentButton">
 								<i class="bi bi-caret-right-fill"></i>
 							</button>
 						</div>
 						<div class="d-flex justify-content-between align-items-baseline mt-2">
-							<span>Alumno </span>
+							<span class="user-select-none">Alumno</span>
 						</div>
 						<span id="currentStudentName" class="text-muted">Jorge Andrés Fonteveccia de Bernardo</span>
 					</div>

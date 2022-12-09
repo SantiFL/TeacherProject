@@ -19,6 +19,7 @@
 	--bs-btn-hover-bg: #3584b9;
 	--bs-btn-active-bg: #3584b9;
 	--bs-btn-disabled-bg: #3584b9;
+	--bs-btn-focus-box-shadow: 0 0 0 2px rgba(67, 166, 232, .5);
 }
 
 .btn-outline-main {
@@ -38,6 +39,20 @@
 	--bs-btn-border-color: #43A6E8;
 	--bs-btn-active-border-color: #3584b9;
 	--bs-btn-hover-border-color: #3584b9;
+	--bs-btn-focus-box-shadow: 0 0 0 2px rgba(67, 166, 232, .5);
+}
+
+.btn-second {
+	--bs-btn-color: white;
+	--bs-btn-hover-color: white;
+	--bs-btn-active-color: white;
+	--bs-btn-disabled-color: white;
+
+	--bs-btn-bg: #e84555;
+	--bs-btn-hover-bg: #b93744;
+	--bs-btn-active-bg: #b93744;
+	--bs-btn-disabled-bg: #b93744;
+	--bs-btn-focus-box-shadow: 0 0 0 2px rgba(232, 69, 85, .5);
 }
 
 #loadStudentsButton {

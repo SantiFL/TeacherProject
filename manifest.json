@@ -9,7 +9,7 @@
   "commands": {
     "openSidebar": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Y"
+        "default": "Alt+A"
       },
       "description": "Placeholder command description"
     }
